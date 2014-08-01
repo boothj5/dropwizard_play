@@ -1,24 +1,31 @@
 package com.boothj5.dropwizardplay.core;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class SystemInformation {
+    private String osVersion;
+    private String osArch;
     private String user;
-    private String os;
+    private String osName;
 
-    public SystemInformation() {}
-
-    public SystemInformation(String os, String user) {
-        this.os = os;
+    public SystemInformation(String osArch, String osName, String osVersion, String user) {
+        this.osArch = osArch;
+        this.osName = osName;
+        this.osVersion = osVersion;
         this.user = user;
     }
 
-    @JsonProperty
-    public String getOs() {
-        return os;
+    public String getOsName() {
+        return osName;
     }
 
     public String getUser() {
         return user;
+    }
+
+    public String getOsArch() {
+        return osArch;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
     }
 }

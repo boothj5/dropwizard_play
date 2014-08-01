@@ -17,10 +17,14 @@ public class SysInfoResource {
     public SysInfoResource(SystemInformationService service) {
         this.service = service;
     }
+
     @GET
     public SystemInformation systemInfo() {
-        String os = service.getOperatingSystem();
+        String osArch = service.getOSArch();
+        String osName = service.getOSName();
+        String osVersion = service.getOSVersion();
         String user = service.getUser();
-        return new SystemInformation(os, user);
+
+        return new SystemInformation(osArch, osName, osVersion, user);
     }
 }
