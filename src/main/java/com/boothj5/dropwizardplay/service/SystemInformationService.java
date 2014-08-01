@@ -7,6 +7,7 @@ public class SystemInformationService {
     }
 
     public String getUser() {
-        return System.getProperty("user.name");
+        throw new RuntimeException("POOP");
+//        return System.getProperty("user.name");
     }
 }

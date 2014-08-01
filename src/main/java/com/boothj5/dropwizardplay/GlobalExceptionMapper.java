@@ -1,5 +1,6 @@
 package com.boothj5.dropwizardplay;
 
+import com.boothj5.dropwizardplay.core.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +14,6 @@ public class GlobalExceptionMapper implements ExceptionMapper<RuntimeException> 
     @Override
     public Response toResponse(RuntimeException e) {
         LOG.error("Error", e);
-        return Response.serverError().entity("Error:" + e).build();
+        return Response.serverError().entity(new ErrorResponse(e)).build();
     }
 }
