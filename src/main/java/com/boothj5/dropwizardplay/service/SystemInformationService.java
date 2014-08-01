@@ -1,20 +1,15 @@
 package com.boothj5.dropwizardplay.service;
 
+import com.boothj5.dropwizardplay.core.SystemInformation;
+
 public class SystemInformationService {
 
-    public String getOSArch() {
-        return System.getProperty("os.arch");
-    }
+    public SystemInformation getSystemInformation() {
+        String arch = System.getProperty("os.arch");
+        String name = System.getProperty("os.name");
+        String version = System.getProperty("os.version");
+        String user = System.getProperty("user.name");
 
-    public String getOSVersion() {
-        return System.getProperty("os.version");
-    }
-
-    public String getOSName() {
-        return System.getProperty("os.name");
-    }
-
-    public String getUser() {
-        return System.getProperty("user.name");
+        return new SystemInformation(arch, name, version, user);
     }
 }

@@ -20,11 +20,8 @@ public class SysInfoResource {
 
     @GET
     public SystemInformation systemInfo() {
-        String osArch = service.getOSArch();
-        String osName = service.getOSName();
-        String osVersion = service.getOSVersion();
-        String user = service.getUser();
+        SystemInformation systemInformation = service.getSystemInformation();
 
-        return new SystemInformation(osArch, osName, osVersion, user);
+        return systemInformation;
     }
 }
