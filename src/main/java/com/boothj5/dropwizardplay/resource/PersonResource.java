@@ -1,8 +1,9 @@
-package com.boothj5.dropwizardplay.resources;
+package com.boothj5.dropwizardplay.resource;
 
 import com.boothj5.dropwizardplay.core.ErrorResponse;
 import com.boothj5.dropwizardplay.core.Person;
-import com.boothj5.dropwizardplay.store.PersonStore;
+import com.boothj5.dropwizardplay.infrastructure.store.PersonStore;
+import com.codahale.metrics.annotation.Timed;
 import org.eclipse.jetty.http.HttpStatus;
 
 import javax.ws.rs.*;
@@ -23,6 +24,7 @@ public class PersonResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Timed
     public Map<Long, Person> getUsers() {
         return store.getPeople();
     }
@@ -30,6 +32,7 @@ public class PersonResource {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Timed
     public Response getUser(@PathParam("id") Long id) {
         Person person = store.getPerson(id);
 
@@ -48,6 +51,7 @@ public class PersonResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Timed
     public Response addUser(Person user) throws URISyntaxException {
         long id = store.addUser(user);
 

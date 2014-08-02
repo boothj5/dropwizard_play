@@ -1,4 +1,4 @@
-package com.boothj5.dropwizardplay.service;
+package com.boothj5.dropwizardplay.infrastructure.system;
 
 import com.boothj5.dropwizardplay.core.SystemInformation;
 

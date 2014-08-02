@@ -5,3 +5,5 @@ server:
   adminConnectors:
   - type: http
     port: 9001
+
+jenkinsHost: http://localhost:8080

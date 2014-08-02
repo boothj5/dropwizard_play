@@ -1,9 +1,12 @@
 package com.boothj5.dropwizardplay;
 
-import com.boothj5.dropwizardplay.resources.PersonResource;
-import com.boothj5.dropwizardplay.resources.SysInfoResource;
-import com.boothj5.dropwizardplay.service.SystemInformationService;
-import com.boothj5.dropwizardplay.store.PersonStore;
+import com.boothj5.dropwizardplay.healthcheck.JenkinsHealthCheck;
+import com.boothj5.dropwizardplay.infrastructure.externalsystem.JenkinsClient;
+import com.boothj5.dropwizardplay.resource.JenkinsResource;
+import com.boothj5.dropwizardplay.resource.PersonResource;
+import com.boothj5.dropwizardplay.resource.SysInfoResource;
+import com.boothj5.dropwizardplay.infrastructure.system.SystemInformationService;
+import com.boothj5.dropwizardplay.infrastructure.store.PersonStore;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -25,12 +28,19 @@ public class DropwizardPlayApplication extends Application<DropwizardPlayConfigu
 
     @Override
     public void run(DropwizardPlayConfiguration configuration, Environment environment) {
+        final JenkinsHealthCheck healthCheck =
+                new JenkinsHealthCheck(configuration.getJenkinsHost());
+        environment.healthChecks().register("jenkins", healthCheck);
+
         environment.jersey().register(GlobalExceptionMapper.class);
 
         SystemInformationService sysInfoService = new SystemInformationService();
-        PersonStore personStore = new PersonStore();
-
         environment.jersey().register(new SysInfoResource(sysInfoService));
+
+        PersonStore personStore = new PersonStore();
         environment.jersey().register(new PersonResource(personStore));
+
+        JenkinsClient jenkinsClient = new JenkinsClient(configuration.getJenkinsHost());
+        environment.jersey().register(new JenkinsResource(jenkinsClient));
     }
 }

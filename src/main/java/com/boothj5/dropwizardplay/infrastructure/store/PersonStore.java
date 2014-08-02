@@ -1,4 +1,4 @@
-package com.boothj5.dropwizardplay.store;
+package com.boothj5.dropwizardplay.infrastructure.store;
 
 import com.boothj5.dropwizardplay.core.Person;
 

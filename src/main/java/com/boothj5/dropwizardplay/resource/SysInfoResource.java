@@ -1,7 +1,8 @@
-package com.boothj5.dropwizardplay.resources;
+package com.boothj5.dropwizardplay.resource;
 
 import com.boothj5.dropwizardplay.core.SystemInformation;
-import com.boothj5.dropwizardplay.service.SystemInformationService;
+import com.boothj5.dropwizardplay.infrastructure.system.SystemInformationService;
+import com.codahale.metrics.annotation.Timed;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -19,6 +20,7 @@ public class SysInfoResource {
     }
 
     @GET
+    @Timed
     public SystemInformation systemInfo() {
         SystemInformation systemInformation = service.getSystemInformation();
 
