@@ -37,10 +37,10 @@ public class DropwizardPlayApplication extends Application<DropwizardPlayConfigu
         SystemInformationService sysInfoService = new SystemInformationService();
         environment.jersey().register(new SysInfoResource(sysInfoService));
 
-        PersonStore personStore = new PersonStore();
+        PersonStore personStore = new PersonStore(environment.metrics());
         environment.jersey().register(new PersonResource(personStore));
 
-        JenkinsClient jenkinsClient = new JenkinsClient(configuration.getJenkinsHost());
+        JenkinsClient jenkinsClient = new JenkinsClient(environment.metrics(), configuration.getJenkinsHost());
         environment.jersey().register(new JenkinsResource(jenkinsClient));
     }
 }

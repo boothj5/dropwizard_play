@@ -44,7 +44,7 @@ public class PersonResource {
         } else {
             return Response
                     .status(HttpStatus.NOT_FOUND_404)
-                    .entity(new ErrorResponse("Not found"))
+                    .entity(ErrorResponse.notFound())
                     .build();
         }
     }

@@ -1,5 +1,6 @@
 package com.boothj5.dropwizardplay.healthcheck;
 
+import com.boothj5.dropwizardplay.infrastructure.externalsystem.JenkinsClient;
 import com.codahale.metrics.health.HealthCheck;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -17,7 +18,7 @@ public class JenkinsHealthCheck extends HealthCheck {
     @Override
     protected Result check() throws Exception {
         Client client = Client.create();
-        WebResource resource = client.resource(jenkinsHost + "/api/json");
+        WebResource resource = client.resource(jenkinsHost + JenkinsClient.JOBS_PATH);
         ClientResponse response = resource
                 .accept(MediaType.APPLICATION_JSON)
                 .get(ClientResponse.class);

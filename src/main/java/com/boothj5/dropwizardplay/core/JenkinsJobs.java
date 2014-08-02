@@ -6,13 +6,13 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JenkinsJobs {
-    private List<JenkinsJob> jobs;
+    private List<JenkinsJobSummary> jobs;
 
-    public List<JenkinsJob> getJobs() {
+    public List<JenkinsJobSummary> getJobs() {
         return jobs;
     }
 
-    public void setJobs(List<JenkinsJob> jobs) {
+    public void setJobs(List<JenkinsJobSummary> jobs) {
         this.jobs = jobs;
     }
 }
