@@ -1,7 +1,9 @@
 package com.boothj5.dropwizardplay;
 
+import com.boothj5.dropwizardplay.resources.PersonResource;
 import com.boothj5.dropwizardplay.resources.SysInfoResource;
 import com.boothj5.dropwizardplay.service.SystemInformationService;
+import com.boothj5.dropwizardplay.store.PersonStore;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -26,6 +28,9 @@ public class DropwizardPlayApplication extends Application<DropwizardPlayConfigu
         environment.jersey().register(GlobalExceptionMapper.class);
 
         SystemInformationService sysInfoService = new SystemInformationService();
+        PersonStore personStore = new PersonStore();
+
         environment.jersey().register(new SysInfoResource(sysInfoService));
+        environment.jersey().register(new PersonResource(personStore));
     }
 }
